@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section>
-        
+    <section>  
       <div class="container">
         <h1>Your Projects</h1>
       </div>
@@ -33,23 +32,20 @@
                   <td> {{ isset($project->type) ?  $project->type->name : '-' }}</td>
                   <td>{{$project->link}}</td>
                   <td>{{$project->project_status}}</td>
-
                   <td>
-                    <a class="btn btn-primary" href="{{ route('admin.projects.edit',$project) }}">Edit</a>
+                    <a href="{{ route('admin.projects.edit',$project) }}"><button class="btn btn-primary">Edit</button></a>
                   </td>
-                 <td>
+                  <td>
                     <form action="{{ route('admin.projects.destroy',$project)}}" method="POST">
                       @csrf
                       @method('DELETE')
-
                       <button class="btn btn-danger">Delete</button>
                     </form>
                   </td> 
-                  
                 </tr>
             @empty
                 <tr>
-                  <td>Nessun project</td>
+                  <td>You don't have any projects</td>
                 </tr>
             @endforelse
           </tbody>
