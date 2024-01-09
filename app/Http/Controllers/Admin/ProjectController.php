@@ -7,6 +7,8 @@ use App\Models\Project;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+
 
 
 class ProjectController extends Controller
@@ -59,7 +61,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view ('admin.projects.edit', compact('project'));
+        $types = Type::orderBy('name', 'ASC')->get();
+        return view ('admin.projects.edit', compact('project', 'types'));
+        
     }
 
     /**
@@ -67,7 +71,13 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        $request->validate([
+            'name' => ['required',' max:255', 'string', Rule::unique('projects')->ignore($project->id)],
+            'type_id' => 'nullable|exists:types,id'
+        ]);
+        
         $data = $request->all();
+        $data['link'] = 'https://github.com/SabrinaGiancaspr/'. Str::slug($data['name']);
         $project->update($data);
         return redirect()->route('admin.projects.index', $project);
     }
