@@ -19,17 +19,17 @@
 
       </div>
       <div class="mb-3">
-        <label for="project_type" class="form-label">project type</label>
-        <input type="text" class="form-control" name="project_type" id="project_type" placeholder="project type">
+        <label for="type_id" class="form-label">project type</label>
+        <select type="text" class="form-control" name="type_id" id="type_id" placeholder="project type">
+          <option>select a project type</option>
+          @foreach ($types as $type)
+              <option @selected(old('type_id') == $type->id) value="{{$type->id}}">{{$type->name}}</option>
+          @endforeach
+        </select>
       </div>
       <div class="mb-3">
         <label for="project_status" class="form-label">project status</label>
         <input type="text" class="form-control" name="project_status" id="project_status" placeholder="project status">
-      </div>
-
-      <div class="mb-3">
-        <label for="link" class="form-label">link</label>
-        <input type="text" class="form-control" name="link" id="link" placeholder="link">
       </div>
       
       <div class="">

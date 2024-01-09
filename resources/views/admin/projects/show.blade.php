@@ -9,7 +9,13 @@
                 <h5 class="card-title">project name:{{$project->name}}</h5>
                 <p class="card-text">project description: {{$project->description}}</p>
                 <a href="#" class="card-link">GitHub link: {{$project->link}}</a>
-                <p class="card-text">project type: {{$project->project_type}}</p>
+                
+                  @if ($project->type)
+                <p class="card-text">project type: 
+                  {{$project->type->name}}
+                </p>
+                  @endif
+                    
                 </div>
             </div>
       </div>

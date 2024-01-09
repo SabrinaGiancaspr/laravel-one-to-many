@@ -30,7 +30,7 @@
                   </a>
                   </td>
                   <td>{{ $project->description }}</td>
-                  <td>{{$project->project_type}}</td>
+                  <td> {{ isset($project->type) ?  $project->type->name : '-' }}</td>
                   <td>{{$project->link}}</td>
                   <td>{{$project->project_status}}</td>
 
@@ -45,7 +45,7 @@
                       <button class="btn btn-danger">Delete</button>
                     </form>
                   </td> 
-
+                  
                 </tr>
             @empty
                 <tr>
